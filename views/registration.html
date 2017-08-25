@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    #form {
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        z-index: 15;
+        top: 50%;
+        left: 50%;
+        margin: -100px 0 0 -150px;
+    }
+    input{
+        margin: 5px;
+    }
+</style>
+</head>
+<body>
+<div id="form">
+<form action="/registration" method="post">
+  Username:     <input type="text" name="name1" id="name"><br>
+  Password:     <input type="password" id="password1" name="password1"><br>
+  DateOfBirth:  <input type="date" id="dob" name="dob1"><br>
+  Contact:      <input type="text" id="contact" name="contact1"><br>
+  Email:        <input type="email" id="email" name="email1"><br>
+  Address:      <input type="text" id="address" name="address1"><br>
+  State:        <input type="text" id="state" name="state1"><br>
+  City:         <input type="text" id="city" name="city1"><br>
+  Pin:          <input type="text" id="pin" name="pin1"><br>
+    <input type="submit" name="submit" onclick="onValidate();" >
+</form>
+</div>
+<script>
+    var name=document.getElementById('name');
+    var dob=document.getElementById('dob');
+    var contact=document.getElementById('contact');
+    var email=document.getElementById('email');
+    var text="";
+    function validateEmail() {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if( !re.test(email.value)) {
+            text+="email should be correct";
+        }
+    }
+    function ageValidation() {
+        var dobvalue=new Date(dob.value);
+        var today=new Date();
+        if (today.getFullYear()-dobvalue.getFullYear()<10)
+        text+="age should be greater than 10";
+    }
+    
+    function contactValidation() {
+        var contactValue=contact.value;
+        if (contactValue.length<10&&contactValue.length>14)
+           text+="contact number should be validated";
+    }
+
+    function onValidate() {
+            validateEmail();
+            ageValidation();
+            contactValidation();
+            if (text==="") {
+            return true;
+            }
+            else {
+                alert(text);
+                return false;
+        }
+    }
+
+
+</script>
+</body>
+</html>
